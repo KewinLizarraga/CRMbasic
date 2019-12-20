@@ -1,8 +1,10 @@
 ## CRM basic
 
+### Clone
+> git clone https://github.com/KewinLizarraga/CRMbasic.git
 ### Frontend
-> cd cliente-api
+* cd cliente-api
 > `npm install`
 ### Backend
-> cd restAPI
+* cd restAPI
 > `npm install`
