@@ -8,5 +8,6 @@ router.get('/', productosController.mostrarProductos);
 router.get('/:idProducto', productosController.mostrarProducto);
 router.put('/:idProducto', productosController.subirArchivo, productosController.actualizarProducto);
 router.delete('/:idProducto', productosController.eliminarProducto);
+router.post('/busqueda/:query', productosController.buscarProducto);
 
 module.exports = router;

@@ -54,7 +54,7 @@ module.exports = {
     const producto = await Productos.findById(req.params.idProducto);
     if (!producto) {
       res.json({ mensaje: 'Este producto no existe' });
-      next();
+      return next();
     }
     res.json(producto);
   },
@@ -67,7 +67,7 @@ module.exports = {
         let productoAnterior = await Productos.findById(req.params.idProducto);
         nuevoProducto.imagen = productoAnterior.imagen;
       }
-      let producto = await Productos.findOneAndUpdate({ _id: req.params.idProducto }, req.body, { new: true });
+      let producto = await Productos.findOneAndUpdate({ _id: req.params.idProducto }, nuevoProducto, { new: true });
       res.json(producto);
     } catch (error) {
       console.log(error);
@@ -76,8 +76,19 @@ module.exports = {
   },
   eliminarProducto: async (req, res, next) => {
     try {
-      await Productos.findOneAndDelete({ _id: req.params.idProducto });
+      await Productos.findByIdAndDelete({ _id: req.params.idProducto });
       res.json({ mensaje: 'El producto se ha eliminado' })
+    } catch (error) {
+      console.log(error);
+      next();
+    }
+  },
+  buscarProducto: async (req, res, next) => {
+    try {
+      // Obtener el query
+      const { query } = req.params;
+      const producto = await Productos.find({ nombre: new RegExp(query, 'i') });
+      res.json(producto);
     } catch (error) {
       console.log(error);
       next();
