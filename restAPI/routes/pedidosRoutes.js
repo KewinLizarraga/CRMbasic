@@ -3,7 +3,7 @@ const router = express.Router();
 
 const pedidosController = require('../controllers/pedidosController');
 
-router.post('/', pedidosController.nuevoPedido);
+router.post('/nuevo/:idUsuario', pedidosController.nuevoPedido);
 router.get('/', pedidosController.mostrarPedidos);
 router.get('/:idPedido', pedidosController.mostrarPedido);
 router.put('/:idPedido', pedidosController.actualizarPedido);
